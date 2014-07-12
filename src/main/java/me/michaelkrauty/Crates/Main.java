@@ -13,5 +13,6 @@ public class Main extends JavaPlugin {
 
 	public void onEnable() {
 		main = this;
+		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 	}
 }
