@@ -1,0 +1,16 @@
+name: Crates
+version: 1.0
+author: michaelkrauty
+main: me.michaelkrauty.Crates.Main
+commands:
+  crate:
+    aliases: [crates, crate]
+    description: the crates command
+    usage: /<command>
+permissions:
+  crates.open:
+    description: allows the player to open crates
+  crates.give:
+    description: allows the player to use /crates give
+  crates.get.kill:
+    description: gives the player a crate when they kill another player
