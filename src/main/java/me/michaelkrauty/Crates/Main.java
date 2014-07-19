@@ -19,6 +19,8 @@ import java.util.Arrays;
  */
 public class Main extends JavaPlugin {
 
+	public boolean crateOnKill;
+
 	public static Main main;
 
 	public void onEnable() {
@@ -43,7 +45,11 @@ public class Main extends JavaPlugin {
 				e.printStackTrace();
 			}
 		}
+		readConfig();
+	}
 
+	private void readConfig() {
+		crateOnKill = getConfig().getBoolean("crate_on_kill");
 	}
 
 	public static void giveCrate(Inventory inventory) {

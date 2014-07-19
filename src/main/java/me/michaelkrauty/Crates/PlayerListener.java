@@ -38,9 +38,10 @@ public class PlayerListener implements Listener {
 					ItemMeta meta = item.getItemMeta();
 					if (meta.getDisplayName().equals("Magic Crate")) {
 						if (meta.getLore().equals(Arrays.asList("A Magical Storage Box"))) {
-							event.setCancelled(true);
+
 							// Ladies and gentlemen, we have a crate.
 
+							event.setCancelled(true);
 							Set set = main.getConfig().getConfigurationSection("items").getKeys(true);
 							ArrayList<String> blocks = new ArrayList<String>();
 							ArrayList<Integer> amounts = new ArrayList<Integer>();
@@ -65,11 +66,15 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
-		if (event.getEntity().getKiller() != null) {
-			Player player = event.getEntity().getKiller();
-			if (player.getInventory().firstEmpty() != -1) {
-				main.giveCrate(player.getInventory());
-				player.sendMessage(ChatColor.GRAY + "You got a magic crate for killing " + event.getEntity().getName() + "!");
+		if (main.crateOnKill) {
+			if (event.getEntity().getKiller() != null) {
+				Player player = event.getEntity().getKiller();
+				if (player.hasPermission("crates.get.kill")) {
+					if (player.getInventory().firstEmpty() != -1) {
+						main.giveCrate(player.getInventory());
+						player.sendMessage(ChatColor.GRAY + "You got a magic crate for killing " + event.getEntity().getName() + "!");
+					}
+				}
 			}
 		}
 	}
